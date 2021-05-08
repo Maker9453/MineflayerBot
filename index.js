@@ -1,4 +1,6 @@
 const mineflayer = require("mineflayer")
+const { pathfinder, Movements, goals } = require("mineflayer-pathfinder")
+const GoalFollow = goals.GoalFollow
 
 const bot = mineflayer.createBot({
   host: "localhost",
@@ -6,15 +8,22 @@ const bot = mineflayer.createBot({
   username: "PsauceBot",
 })
 
-function LookAtPlayer () {
-  const playerFilter = (entity) => entity.type == 'player'
-  const playerEntity = bot.nearestEntity(playerFilter)
+bot.loadPlugin(pathfinder)
 
-  if (!playerEntity) return
+function followPlayer () {
+  const playerCI = bot.players["YenKa305"]
 
-  const pos = playerEntity.position.offset(0,playerEntity.height,0)
-  bot.lookAt(pos)
+  if (!playerCI) {
+    bot.chat("I can't see CI")
+    return
+  }
 
+  const mcData = require("minecraft-data")(bot.version)
+  const movements = new Movements(bot, mcData)
+  bot.pathfinder.setMovements(movements)
+
+  const goal = new GoalFollow(playerCI.entity, 1)
+  bot.pathfinder.setGoal(goal, true)
 }
 
-bot.on("physicTick", LookAtPlayer)
+bot.once('spawn', followPlayer)

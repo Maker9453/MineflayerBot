@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/Maker9453/MineflayerBot#readme",
   "dependencies": {
-    "mineflayer": "^3.6.0"
+    "minecraft-data": "^2.84.0",
+    "mineflayer": "^3.6.0",
+    "mineflayer-pathfinder": "^1.6.1"
   }
 }
