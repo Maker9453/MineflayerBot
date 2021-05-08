@@ -19,6 +19,7 @@
   "dependencies": {
     "minecraft-data": "^2.84.0",
     "mineflayer": "^3.6.0",
-    "mineflayer-pathfinder": "^1.6.1"
+    "mineflayer-pathfinder": "^1.6.1",
+    "mineflayer-scaffold": "^1.0.0"
   }
 }

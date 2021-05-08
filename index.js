@@ -1,29 +1,29 @@
-const mineflayer = require("mineflayer")
-const { pathfinder, Movements, goals } = require("mineflayer-pathfinder")
-const GoalFollow = goals.GoalFollow
-
-const bot = mineflayer.createBot({
+const minflayer = require("mineflayer")
+const bot = minflayer.createBot({
+  port: 62949,
   host: "localhost",
-  port: 58521,
   username: "PsauceBot",
 })
 
-bot.loadPlugin(pathfinder)
-
-function followPlayer () {
-  const playerCI = bot.players["YenKa305"]
-
-  if (!playerCI) {
-    bot.chat("I can't see CI")
-    return
+function MLGblock () {
+  const MinecraftData = require("minecraft-data")(bot.version)
+  const fall_pos = {
+    x: bot.entity.position.x,
+    y: bot.entity.position.y - 1,
+    z: bot.entity.position.z,
   }
-
-  const mcData = require("minecraft-data")(bot.version)
-  const movements = new Movements(bot, mcData)
-  bot.pathfinder.setMovements(movements)
-
-  const goal = new GoalFollow(playerCI.entity, 1)
-  bot.pathfinder.setGoal(goal, true)
+  function blockNotWater() {
+  if (bot.findBlock(options = fall_pos ) != MinecraftData.blocks[26]) {
+    return true
+  }else{
+     return false
+    }
+  }
+  if (blockNotWater() == true){
+    bot.lookAt(point = fall_pos)
+    bot.heldItem = MinecraftData.items[661]
+    bot.activateItem()
+  }else{
+    }
 }
-
-bot.once('spawn', followPlayer)
+bot.on("physicTick",MLGblock)
