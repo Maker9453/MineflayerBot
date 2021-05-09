@@ -1,7 +1,7 @@
 
 const minflayer = require("mineflayer")
 const bot = minflayer.createBot({
-  port: 62949,
+  port: 62331,
   host: "localhost",
   username: "PsauceBot2",
 })
