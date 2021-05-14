@@ -1,13 +1,13 @@
 
 const minflayer = require("mineflayer")
 const bot = minflayer.createBot({
-  port: 60618,
+  port: 63150,
   host: "localhost",
   username: "PsauceBot2",
 })
 
 bot.once("spawn",() => {
-  mcData = require("minecraft-data")(bot.version)
+  const mcData = require("minecraft-data")(bot.version)
 })
 
 bot.on("chat",(username,message) => {
