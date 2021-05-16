@@ -1,7 +1,6 @@
 {
   "name": "mineflayerbot",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,5 +20,8 @@
     "mineflayer": "^3.6.0",
     "mineflayer-pathfinder": "^1.6.1",
     "mineflayer-scaffold": "^1.0.0"
-  }
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "description": ""
 }
