@@ -8,50 +8,35 @@ const bot = mineflayer.createBot({
   host: "localhost",
   username: "PsauceBot",
 })
+const mcData = require("minecraft-data")(bot.version)
+const pos = new Vec3(bot.entity.position.x,bot.entity.position.y - 1,bot.entity.position.z)
 
-bot.once("spawn",()=>{
-  const mcData = require("minecraft-data")(bot.version)
-  bot.on("physicTick",()=>{  
-    const pos = new Vec3(bot.entity.position.x,bot.entity.position.y - 1,bot.entity.position.z)
-    if (bot.blockAt(point = pos).name == mcData.blocks[0].name) {
-      bot.lookAt(point = pos)
-      bot.setQuickBarSlot(0)
-      if(bot.inventory.slots[36] == null){
-        for(let inventory_slots = 36; inventory_slots < 46; inventory_slots ++){
-          if(bot.inventory.slots[inventory_slots] == null) return
-          if (bot.inventory.slots[inventory_slots].name == mcData.items[661].name) {
-            bot.moveSlotItem(inventory_slots, 36)
-            bot.lookAt(point = pos)
-            bot.activateItem()
-            break
-          }else{
-            bot.lookAt(point = pos)
-            bot.activateItem()
-          }
-        }
-      }else{
-        if(bot.inventory.slots[36].name != "water_bucket"){
-          bot.chat("!= water_bucket")
-          for(let inventory_slots = 36; inventory_slots < 45; inventory_slots ++){
-            if(bot.inventory.slots[inventory_slots] == null) return
-            if (bot.inventory.slots[inventory_slots].name == mcData.items[661].name) {
-              bot.chat("move item")
-              bot.moveSlotItem(inventory_slots, 36)
-              bot.lookAt(point = pos)
-              bot.activateItem()
-              break
-            }
-          }
-        }else{
-          bot.chat("== water_bucket")
-          bot.lookAt(point = pos)
-          bot.activateItem()
-          setTimeout(() => {
-            bot.activateItem()
-          }, 100);
-          bot.chat("有放水")
+const MLG = () => {
+  if (bot.inventory.slots[36] == null) {
+    for (let inventory_slots = 36; inventory_slots < 46; inventory_slots++){
+      if(bot.inventory.slots[inventory_slots].name == null) return
+      if (bot.inventory.slots[inventory_slots].name == mcData.items[661].name) {
+        bot.moveSlotItem(inventory_slots, 36)
+        break
+      }
+    }
+  }else{
+    if (bot.inventory.slots[36] != mcData.items[661].name) {
+      for (let inventory_slots = 36; inventory_slots < 46; inventory_slots++){
+        if(bot.inventory.slots[inventory_slots].name == null) return
+        if (bot.inventory.slots[inventory_slots].name == mcData.items[661].name) {
+          bot.moveSlotItem(inventory_slots, 36)
+          break
         }
       }
     }
-  })
-})
+  }
+  bot.lookAt(pos)
+  while (bot.blockAt(pos).name == mcData.blocks[0].name) {
+    if (bot.blockAt(pos).name != mcData.blocks[0].name) {
+      bot.activateItem()
+      bot.activateItem()
+      break
+    }
+  }
+}
