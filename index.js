@@ -2,12 +2,12 @@ const mineflayer = require('mineflayer')
 
 const bot = mineflayer.createBot({
   host: 'localhost',
-  post: 60712,
+  port: 60712,
   username: 'PsauceBot'
 })
 
-function looNearestPlayer() {
-  const playerfilter = { entity }; entity.type === 'player'
+function lookAtNearestPlayer() {
+  const playerfilter = ( entity ) => entity.type === 'player'
   const playerEntity = bot.nearestEntity(playerEntity)
 
   if (!playerfilter) return
@@ -17,4 +17,4 @@ function looNearestPlayer() {
 
 }
 
-bot.on('physicTick', looNearestPlayer)
+bot.on('physicTick', lookAtNearestPlayer)
