@@ -6,15 +6,14 @@ const bot = mineflayer.createBot({
   username: 'PsauceBot'
 })
 
-function lookAtNearestPlayer() {
-  const playerfilter = ( entity ) => entity.type === 'player'
-  const playerEntity = bot.nearestEntity(playerEntity)
-
-  if (!playerfilter) return
-
+function lookAtNearestPlayer () {
+  const playerFilter = (entity) => entity.type === 'player'
+  const playerEntity = bot.nearestEntity(playerFilter)
+  
+  if (!playerEntity) return
+  
   const pos = playerEntity.position.offset(0, playerEntity.height, 0)
   bot.lookAt(pos)
-
 }
 
 bot.on('physicTick', lookAtNearestPlayer)
