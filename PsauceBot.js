@@ -4,7 +4,7 @@ const { GoalNear, GoalBlock, GoalXZ, GoalY, GoalInvert, GoalFollow, GoalBreakBlo
 
 const bot = mineflayer.createBot({
   host: 'localhost',
-  port: 64512,
+  port: 56804,
   username: 'PsauceBot'
 })
 
@@ -15,5 +15,8 @@ bot.on('chat', async function (username, message) {
   if (message == 'go') {
     require('./AutoTradeVillager/Pathfinder')(bot)
   }
-  
+  if (message == 'ok'){
+    require('./AutoTradeVillager/AutoTrade')(bot)
+  }
+
 })
